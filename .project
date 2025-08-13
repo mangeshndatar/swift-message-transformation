@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>swift-json-transformer</name>
+	<comment></comment>
+	<projects>
+		<project>aml-client</project>
+		<project>archiver</project>
+		<project>common</project>
+		<project>ftp-service</project>
+		<project>json-transformer</project>
+		<project>swift-parser</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+	</natures>
+</projectDescription>

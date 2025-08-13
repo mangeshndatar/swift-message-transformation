@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="aml-client" />
+        <module name="swift-parser" />
+        <module name="archiver" />
+        <module name="common" />
+        <module name="ftp-service" />
+        <module name="json-transformer" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
