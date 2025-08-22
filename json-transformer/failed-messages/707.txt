@@ -1,0 +1,5 @@
+MT707 Amendment to a Documentary Credit.
+Example:
+:20:DC707123
+:21:RELDC700123
+:31C:250820

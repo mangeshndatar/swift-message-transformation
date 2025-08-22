@@ -1,0 +1,5 @@
+MT548 Settlement Status and Processing Advice.
+Example:
+:20:SETT548123
+:25D:SETT//PENDING
+:35B:ISIN US9876543210

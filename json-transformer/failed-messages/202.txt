@@ -1,0 +1,6 @@
+MT202 General Financial Institution Transfer.
+Example:
+:20:TRF202123
+:32A:250818USD20000,
+:52A:BANKUS33XXX
+:57A:BANKDEFFXXX

@@ -1,0 +1,6 @@
+MT200 Financial Institution Transfer.
+Example:
+:20:TRF200123
+:32A:250818USD10000,
+:52A:BANKUS33XXX
+:57A:BANKGB2LXXX

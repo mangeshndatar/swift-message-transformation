@@ -9,12 +9,12 @@
   <packaging>pom</packaging>
   
   <modules>
-    <module>common</module>
-    <module>ftp-service</module>
-    <module>swift-parser</module>
-    <module>json-transformer</module>
-    <module>aml-client</module>
-    <module>archiver</module>
+  <module>common</module>
+  <module>ftp-service</module>
+  <module>swift-parser</module>
+  <module>json-transformer</module>
+  <module>aml-client</module>
+  <module>archiver</module>
 </modules>
 
   <dependencies>

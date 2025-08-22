@@ -1,0 +1,5 @@
+MT732 Advice of Discharge.
+Example:
+:20:DISC732123
+:21:RELDC700123
+:31C:250828

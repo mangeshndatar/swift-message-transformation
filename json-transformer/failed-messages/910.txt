@@ -1,0 +1,5 @@
+MT910 Confirmation of Credit.
+Example:
+:20:CRED910123
+:25:ACCOUNT12345
+:32A:250818USD12000,

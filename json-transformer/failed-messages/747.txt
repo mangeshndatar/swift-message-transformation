@@ -1,0 +1,5 @@
+MT747 Amendment to an Authorization to Reimburse.
+Example:
+:20:AUTH747123
+:21:RELDC740123
+:31C:250903

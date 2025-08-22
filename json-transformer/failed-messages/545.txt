@@ -1,0 +1,6 @@
+MT545 Receive Against Payment Confirmation.
+Example:
+:20:REC545123
+:95P:DEAG//BANKJPJTXXX
+:97A:SAFE11223
+:35B:ISIN JP1234567890

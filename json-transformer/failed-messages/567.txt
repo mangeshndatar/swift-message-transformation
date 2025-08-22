@@ -1,0 +1,5 @@
+MT567 Corporate Action Status and Processing Advice.
+Example:
+:20:CA567123
+:22F:CAEV//PROC
+:98A::PREP//250818

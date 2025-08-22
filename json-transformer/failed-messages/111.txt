@@ -1,0 +1,5 @@
+MT111 Request for Stop Payment.
+Example:
+:20:STOP12345
+:21:CHK98765
+:32A:250818USD1200,

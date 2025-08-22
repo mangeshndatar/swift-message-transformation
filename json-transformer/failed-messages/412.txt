@@ -1,0 +1,5 @@
+MT412 Advice of Acceptance.
+Example:
+:20:ACC412123
+:21:RELREF456
+:32A:250818USD9000,

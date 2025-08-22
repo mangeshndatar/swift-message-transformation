@@ -1,0 +1,6 @@
+MT537 Statement of Pending Transactions.
+Example:
+:20:STMT537123
+:95P:ACOW//BANKDEFFXXX
+:97A:SAFE11235
+:35B:ISIN DE1123581321

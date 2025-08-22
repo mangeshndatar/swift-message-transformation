@@ -1,0 +1,8 @@
+{1:F01BANKBEBBAXXX0000000000}
+{2:I49920}
+{4:
+:20:REF499123
+:79:This is a general free text communication.
+:70:Invoice Payment
+:71A:OUR
+-}

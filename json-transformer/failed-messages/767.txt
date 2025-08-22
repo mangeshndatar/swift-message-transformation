@@ -1,0 +1,5 @@
+MT767 Amendment to a Guarantee.
+Example:
+:20:GUA767123
+:21:RELGUA760123
+:31C:250911

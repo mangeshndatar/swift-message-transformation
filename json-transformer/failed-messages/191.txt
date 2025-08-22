@@ -1,0 +1,5 @@
+MT191 Request for Payment Cancellation.
+Example:
+:20:CANCEL12345
+:21:ORIGTRX123
+:32A:250818USD1000,

@@ -1,0 +1,5 @@
+MT768 Acknowledgement of a Guarantee.
+Example:
+:20:ACK768123
+:21:RELGUA760123
+:31C:250913

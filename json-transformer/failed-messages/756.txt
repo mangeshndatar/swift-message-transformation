@@ -1,0 +1,5 @@
+MT756 Advice of Reimbursement.
+Example:
+:20:REIM756123
+:21:RELDC740123
+:31C:250905

@@ -1,0 +1,4 @@
+MT199 Free Format Message.
+Example:
+:20:REF199999
+:79:This is a free text communication.

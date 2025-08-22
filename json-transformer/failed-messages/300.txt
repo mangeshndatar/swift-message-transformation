@@ -1,0 +1,7 @@
+MT300 Foreign Exchange Confirmation.
+Example:
+:20:FX300123
+:22A:NEWT
+:82A:BANKUS33XXX
+:87A:BANKGB2LXXX
+:32B:USD100000,

@@ -1,0 +1,5 @@
+MT734 Advice of Refusal.
+Example:
+:20:REF734123
+:21:RELDC700123
+:31C:250830

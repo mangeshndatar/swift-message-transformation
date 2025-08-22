@@ -1,0 +1,4 @@
+MT799 Free Format Message (used in Trade Finance).
+Example:
+:20:REF799123
+:79:General free text communication.

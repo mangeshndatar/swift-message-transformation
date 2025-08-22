@@ -1,0 +1,5 @@
+MT420 Tracer.
+Example:
+:20:TRACE420123
+:21:RELREF789
+:79:Requesting status of payment.

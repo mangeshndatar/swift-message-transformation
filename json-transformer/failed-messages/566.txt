@@ -1,0 +1,5 @@
+MT566 Corporate Action Confirmation.
+Example:
+:20:CA566123
+:22F:CAEV//DVCA
+:98A::PREP//250818

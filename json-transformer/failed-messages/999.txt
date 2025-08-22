@@ -1,0 +1,4 @@
+MT999 Free Format Message.
+Example:
+:20:REF999123
+:79:General communication message.

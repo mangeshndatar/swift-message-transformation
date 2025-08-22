@@ -1,0 +1,5 @@
+MT740 Authorization to Reimburse.
+Example:
+:20:AUTH740123
+:21:RELDC700123
+:31C:250901

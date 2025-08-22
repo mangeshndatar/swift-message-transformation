@@ -1,0 +1,5 @@
+MT410 Acknowledgement of Payment.
+Example:
+:20:ACK410123
+:21:RELREF123
+:32A:250818USD5000,

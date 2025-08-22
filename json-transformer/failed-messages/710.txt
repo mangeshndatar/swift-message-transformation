@@ -1,0 +1,5 @@
+MT710 Advice of a Third Bank's Documentary Credit.
+Example:
+:20:DC710123
+:21:RELDC700123
+:31C:250822

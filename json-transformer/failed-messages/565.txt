@@ -1,0 +1,5 @@
+MT565 Corporate Action Instruction.
+Example:
+:20:CA565123
+:22F:CAEV//DVCA
+:98A::PREP//250818

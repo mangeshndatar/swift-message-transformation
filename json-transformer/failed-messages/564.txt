@@ -1,0 +1,5 @@
+MT564 Corporate Action Notification.
+Example:
+:20:CA564123
+:22F:CAEV//INTR
+:98A::PREP//250818

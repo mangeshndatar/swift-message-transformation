@@ -1,0 +1,9 @@
+{1:F01BANKBEBBAXXX0000000000}
+{2:I42020}
+{4:
+:20:TRACE420123
+:21:RELREF789
+:79:Requesting status of payment.
+:70:Invoice Payment
+:71A:OUR
+-}
