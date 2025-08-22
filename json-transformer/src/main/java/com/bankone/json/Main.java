@@ -45,8 +45,8 @@ public class Main {
             for (File file : messageFiles) {
             		String exception ="Successfully parsed & moved";
                 String fileName = file.getName();
-               System.out.println("✅✅✅✅✅"+file.lastModified());
-                if (auditLogger.isFileAlreadySuccessful(fileName)) {
+               
+                if (auditLogger.isFileAlreadySuccessful(fileName,file.lastModified())) {
                     System.out.println("✅ Skipping already successfully processed file: " + fileName);
                     copyFile(file.toPath(), processedPath, fileName);  // Copy skipped successful file
                     continue;
