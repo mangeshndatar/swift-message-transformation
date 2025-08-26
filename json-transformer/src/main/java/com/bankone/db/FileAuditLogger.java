@@ -43,9 +43,9 @@ public class FileAuditLogger {
             		System.out.println("FROM FILE : ✅✅"+formattedDate);
                 Timestamp dbTimestamp = rs.getTimestamp("last_updated");
                 System.out.println("FROM DB : ✅✅"+dbTimestamp);
-            		if (fileTimestamp.after(dbTimestamp)) {
+            		if (isFileModifiedAfterDb(fileTimestamp, dbTimestamp)) {
             			System.out.println("✅ ✅ ✅ ✅ ✅  found updated file content");
-            			updateFileTimestamp(fileName);
+            			updateFileTimestamp(fileName,fileTimestamp);
             			return false;
             		}
                 return "success".equalsIgnoreCase(rs.getString("status"));
@@ -81,14 +81,16 @@ public class FileAuditLogger {
         }
     }
     
-    public void updateFileTimestamp(String fileName) throws SQLException {
+    public void updateFileTimestamp(String fileName, Timestamp fileTimestamp) throws SQLException {
         String sql = """
             UPDATE file_audit
-            SET last_updated = CURRENT_TIMESTAMP
+            SET last_updated = ?
             WHERE file_name = ?
             """;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, fileName);
+
+        		stmt.setTimestamp(1, fileTimestamp);
+            stmt.setString(2, fileName);
             int rowsAffected = stmt.executeUpdate();
             
             if (rowsAffected > 0) {
@@ -97,6 +99,13 @@ public class FileAuditLogger {
                 System.out.println("⚠️ No file found with the name: " + fileName);
             }
         }
+    }
+
+    public boolean isFileModifiedAfterDb(Timestamp fileTimestamp, Timestamp dbTimestamp) {
+        long fileSeconds = fileTimestamp.getTime() / 1000;
+        long dbSeconds = dbTimestamp.getTime() / 1000;
+
+        return fileSeconds > dbSeconds;
     }
 
 }
