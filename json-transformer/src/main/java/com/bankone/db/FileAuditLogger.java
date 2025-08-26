@@ -40,12 +40,14 @@ public class FileAuditLogger {
             stmt.setString(1, fileName);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-            //	System.out.println("FROM FILE : ✅✅"+formattedDate);
+            		System.out.println("FROM FILE : ✅✅"+formattedDate);
                 Timestamp dbTimestamp = rs.getTimestamp("last_updated");
-            	//System.out.println("FROM DB : ✅✅"+dbTimestamp);
-            	if (fileTimestamp.after(dbTimestamp)) {
-            		return false;
-            	}
+                System.out.println("FROM DB : ✅✅"+dbTimestamp);
+            		if (fileTimestamp.after(dbTimestamp)) {
+            			System.out.println("✅ ✅ ✅ ✅ ✅  found updated file content");
+            			updateFileTimestamp(fileName);
+            			return false;
+            		}
                 return "success".equalsIgnoreCase(rs.getString("status"));
             }
         }
@@ -78,4 +80,23 @@ public class FileAuditLogger {
             stmt.executeUpdate();
         }
     }
+    
+    public void updateFileTimestamp(String fileName) throws SQLException {
+        String sql = """
+            UPDATE file_audit
+            SET last_updated = CURRENT_TIMESTAMP
+            WHERE file_name = ?
+            """;
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, fileName);
+            int rowsAffected = stmt.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                System.out.println("✅ Updated timestamp for file: " + fileName);
+            } else {
+                System.out.println("⚠️ No file found with the name: " + fileName);
+            }
+        }
+    }
+
 }
