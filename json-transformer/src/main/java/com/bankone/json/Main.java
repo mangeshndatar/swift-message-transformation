@@ -4,12 +4,17 @@ import com.bankone.parser.SwiftParser;
 import com.bankone.ftp.FtpFetcher;
 import com.bankone.db.FileAuditLogger;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.prowidesoftware.swift.model.SwiftMessage;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Main {
 
@@ -45,8 +50,11 @@ public class Main {
             for (File file : messageFiles) {
             		String exception ="Successfully parsed & moved";
                 String fileName = file.getName();
-               
-                if (auditLogger.isFileAlreadySuccessful(fileName,file.lastModified())) {
+            		String transactionId = null;
+            		
+            		// TODO : (Code refractor needed) Getting transaction id from the block:20
+                transactionId = parser.getTransactionId(file); 
+                if (auditLogger.isFileAlreadySuccessful(transactionId)) { // checking file parsing based on the transactionID
                     System.out.println("✅ Skipping already successfully processed file: " + fileName);
                     copyFile(file.toPath(), processedPath, fileName);  // Copy skipped successful file
                     continue;
@@ -65,21 +73,18 @@ public class Main {
                 while (retryCount < MAX_RETRY && !success) {
                     retryCount++;
                     try {
-                        String parsed = parser.parse(file, processedFolder);
-
-                        // Simulate failure if message contains "FAIL"
+                    	String parsed = parser.parse(file, processedFolder);
+                      // Simulate failure if message contains "FAIL"
                         if (parsed.contains("FAIL")) {
                             throw new RuntimeException("Simulated failure on file content");
                         }
-
                         System.out.println("\n✅ Transformed to JSON:\n" + parsed);
-                        success = true;
-                        auditLogger.insertOrUpdateAudit(fileName, "success", retryCount,exception);
+                        success = true;     
+                        auditLogger.insertOrUpdateAudit(fileName, "success", retryCount,exception,transactionId);
                         copyFile(file.toPath(), processedPath, fileName);  // Copy success
 
                     } catch (Exception e) {
                         System.out.println("⚠️ Error processing file " + fileName + ", attempt " + retryCount + ": " + e.getMessage());
-                        //e.printStackTrace(System.out);
                         System.out.println(e.getMessage());
                         exception = e.getMessage();
                         if (retryCount < MAX_RETRY) {
@@ -99,7 +104,7 @@ public class Main {
                 		System.out.println();
                 		System.out.println("❌❌❌❌❌❌"+exception+"❌❌❌❌❌");
                     System.out.println("❌ Failed after 3 retries: " + fileName);
-                    auditLogger.insertOrUpdateAudit(fileName, "failed", retryCount,exception);
+                    auditLogger.insertOrUpdateAudit(fileName, "failed", retryCount,exception,null);
                     copyFile(file.toPath(), failedPath, fileName);  // Copy failed
                 }
             }
@@ -125,4 +130,7 @@ public class Main {
             e.printStackTrace(System.out);
         }
     }
+    
+	
+    
 }

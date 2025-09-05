@@ -15,11 +15,12 @@ public class FileAuditLogger {
         String sql = """
             CREATE TABLE IF NOT EXISTS file_audit (
         			id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        			message_id VARCHAR(100),
                 file_name VARCHAR(255),
                 status ENUM('success', 'failed') NOT NULL,
                 retry_count INT DEFAULT 0,
                 last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                reason VARCHAR(100)
+                reason VARCHAR(100)               
             )
             """;
         try (Statement stmt = connection.createStatement()) {
@@ -27,28 +28,14 @@ public class FileAuditLogger {
         }
     }
 
-    public boolean isFileAlreadySuccessful(String fileName, long fileLastModified) throws SQLException {
+    public boolean isFileAlreadySuccessful(String transactionId) throws SQLException {
 
-        Date date = new Date(fileLastModified);
-        Timestamp fileTimestamp = new Timestamp(fileLastModified);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        String formattedDate = dateFormat.format(date);
-
-        String sql = "SELECT status,last_updated FROM file_audit WHERE file_name = ?";
+        String sql = "SELECT message_id FROM file_audit WHERE message_id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, fileName);
+            stmt.setString(1, transactionId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-            		System.out.println("FROM FILE : ✅✅"+formattedDate);
-                Timestamp dbTimestamp = rs.getTimestamp("last_updated");
-                System.out.println("FROM DB : ✅✅"+dbTimestamp);
-            		if (isFileModifiedAfterDb(fileTimestamp, dbTimestamp)) {
-            			System.out.println("✅ ✅ ✅ ✅ ✅  found updated file content");
-            			updateFileTimestamp(fileName,fileTimestamp);
-            			return false;
-            		}
-                return "success".equalsIgnoreCase(rs.getString("status"));
+                return transactionId.equalsIgnoreCase(rs.getString("message_id"));
             }
         }
         return false;
@@ -66,10 +53,11 @@ public class FileAuditLogger {
         return false;
     }
 
-    public void insertOrUpdateAudit(String fileName, String status, int retryCount,String reason) throws SQLException {
-        String sql = """
-            INSERT INTO file_audit (file_name, status, retry_count,reason)
-            VALUES (?, ?, ?,?)
+    public void insertOrUpdateAudit(String fileName, String status, int retryCount,String reason,String transactionId) throws SQLException {
+    System.out.println("########## Transactionid ######"+transactionId);   
+    	String sql = """
+            INSERT INTO file_audit (file_name, status, retry_count,reason,message_id)
+            VALUES (?, ?, ?,?,?)
             ON DUPLICATE KEY UPDATE status = VALUES(status), retry_count = VALUES(retry_count)
             """;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -77,6 +65,7 @@ public class FileAuditLogger {
             stmt.setString(2, status);
             stmt.setInt(3, retryCount);
             stmt.setString(4, reason);
+            stmt.setString(5, transactionId);
             stmt.executeUpdate();
         }
     }

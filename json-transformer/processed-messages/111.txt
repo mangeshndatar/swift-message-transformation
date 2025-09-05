@@ -4,6 +4,6 @@
 :20:STOP12345
 :21:CHK98765
 :32A:250818USD1200,
-:70:Invoice Payment
+:70:Invoice Added
 :71A:OUR
 -}
